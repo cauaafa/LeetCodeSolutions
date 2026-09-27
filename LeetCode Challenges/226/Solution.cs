@@ -12,17 +12,22 @@
  * }
  */
 public class Solution {
-    public int MaxDepth(TreeNode root) {
-        return DFS(root, 0);
+    public TreeNode InvertTree(TreeNode root) {
+        Invert(root);
+
+        return root;
     }
 
-    public int DFS(TreeNode root, int res) {
-        if (root == null) {
-            return res;
-        }
-        int val = res;
-        val++;
-        val = Math.Max(DFS(root.left, val), DFS(root.right, val));
-        return val;
+    public void Invert(TreeNode node) {
+        if(node == null)
+            return;
+        
+        TreeNode aux;
+        aux = node.left;
+        node.left = node.right;
+        node.right = aux;
+
+        Invert(node.left);
+        Invert(node.right);
     }
 }
